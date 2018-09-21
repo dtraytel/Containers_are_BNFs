@@ -3,6 +3,17 @@ theory Containers_BNFs
   imports "HOL-Cardinals.Cardinals"
 begin
 
+(*
+This theory has been tested with Isabelle2018.
+It is best explored interactively by starting Isabelle/jEdit.
+
+To download Isabelle2018 please visit
+
+https://isabelle.in.tum.de/website-Isabelle2018/index.html
+
+and follow the installation instruction from there.
+*)
+
 declare [[bnf_internals]]
 
 unbundle lifting_syntax
