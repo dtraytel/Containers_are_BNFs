@@ -1,8 +1,12 @@
+(*<*)
 theory Containers_BNFs
   imports "HOL-Cardinals.Cardinals"
 begin
 
 declare [[bnf_internals]]
+
+unbundle lifting_syntax
+(*>*)
 
 section \<open>Containers are BNFs\<close>
 
@@ -10,7 +14,7 @@ typedecl S \<comment> \<open>A type/set of shapes.\<close>
 typedecl U \<comment> \<open>A type/set of positions. Not present in the container
    formulation as they work directly with the dependent type P s
    for a fixed shape s. It can be thought of as the dependent sum
-   type U = (\<Sigma>s : S. P s)\<close>
+   type U = (Sum s : S. P s)\<close>
 
 consts P :: "S \<Rightarrow> U set" \<comment> \<open>The actual assignments of positions to shapes.\<close>
 
@@ -74,7 +78,11 @@ The relator @{term rel_F} is defined internally in terms of @{term map_F} and @{
 
 Moreover, the above @{command bnf} command proves a wealth of useful BNF properties,
 including the parametricity of most involved entities:
-@{thm F.map_transfer[no_vars] F.set_transfer[no_vars] F.rel_transfer[no_vars]}.
+\begin{gather*}
+@{thm F.map_transfer[no_vars]}\\
+@{thm F.set_transfer[no_vars]}\\
+@{thm F.rel_transfer[no_vars]}
+\end{gather*}
 \<close>
 
 
@@ -192,7 +200,13 @@ As before relator @{term rel_Q} is defined internally in terms of @{term map_Q} 
 
 Moreover, the above @{command bnf} command proves a wealth of useful BNF properties,
 including the parametricity of most involved entities:
-@{thm Q.map_transfer[no_vars] Q.set_transfer[no_vars] Q.rel_transfer[no_vars]}.
+\begin{gather*}
+@{thm Q.map_transfer[no_vars]}\\
+@{thm Q.set_transfer[no_vars]}\\
+@{thm Q.rel_transfer[no_vars]}
+\end{gather*}
 \<close>
 
+(*<*)
 end
+(*>*)
