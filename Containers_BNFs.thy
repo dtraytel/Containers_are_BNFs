@@ -96,6 +96,38 @@ including the parametricity of most involved entities:
 \end{gather*}
 \<close>
 
+text \<open>The BNF structure arising from the container extension preserves pullbacks.
+
+This proves that the BNF of finite sets (with image as the map function)
+can not be obtained as a container extension, since for
+
+R x y = True
+
+z1 = \{(1,1), (2,2), (1,2)\}
+
+z2 = \{(1,1), (2,2)\}
+
+x = \{1, 2\}
+
+y = \{1, 2\}
+
+we obtain a contradiction to the below lemma.
+\<close>
+
+lemma unique_pullback:
+  fixes z1 z2 x y
+  assumes "set_F z1 \<subseteq> {(a,b). R a b}" "map_F fst z1 = x" "map_F snd z1 = y"
+          "set_F z2 \<subseteq> {(a,b). R a b}" "map_F fst z2 = x" "map_F snd z2 = y"
+  shows "z1 = z2"
+  using assms unfolding subset_eq mem_Collect_eq split_beta Ball_def
+  supply F.map_transfer[transfer_rule del] F.set_transfer[transfer_rule del]
+  apply (transfer_start fixing: R) defer apply transfer_step+ defer apply (transfer_step, transfer_end)
+  apply (auto simp: fun_eq_iff Func_def intro!: prod_eqI split: if_splits)
+   apply metis+
+  done
+
+
+
 
 section \<open>Quotient Containers are BNFs\<close>
 
